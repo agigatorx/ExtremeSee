@@ -1,0 +1,63 @@
+;
+; ExtremeSee.inf - ExtremeSee minifilter driver
+;
+; Note: install.cmd performs the same steps manually (sc create + altitude
+; registry keys), so this INF is mainly for WDK packaging/validation.
+;
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = ActivityMonitor
+ClassGuid   = {b86dff51-a31e-4bac-b3cf-e8cfd59d1211}
+Provider    = %ManufacturerName%
+CatalogFile = ExtremeSee-Driver.cat
+DriverVer   = ; stamped by WDK (StampInf)
+PnpLockdown = 1
+
+[DestinationDirs]
+DefaultDestDir = 12
+ExtremeSee.DriverFiles = 12
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+ExtremeSee-Driver.sys = 1,,
+
+;*****************************************
+; Legacy (non-PnP) install sections
+;*****************************************
+
+[DefaultInstall.NT]
+OptionDesc = %ServiceDescription%
+CopyFiles  = ExtremeSee.DriverFiles
+
+[DefaultInstall.NT.Services]
+AddService = ExtremeSee,,ExtremeSee_Service_Inst
+
+[ExtremeSee.DriverFiles]
+ExtremeSee-Driver.sys
+
+[ExtremeSee_Service_Inst]
+DisplayName    = %ServiceName%
+Description    = %ServiceDescription%
+ServiceType    = 2               ; SERVICE_FILE_SYSTEM_DRIVER (minifilter)
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\ExtremeSee-Driver.sys
+LoadOrderGroup = FSFilter Activity Monitor
+AddReg         = ExtremeSee_Instances
+
+; Minifilter altitude - FltMgr reads these keys from the service key
+[ExtremeSee_Instances]
+HKR,Instances,DefaultInstance,0x00000000,%InstanceName%
+HKR,Instances\%InstanceName%,Altitude,0x00000000,%Altitude%
+HKR,Instances\%InstanceName%,Flags,0x00010001,0
+
+[Strings]
+ManufacturerName    = "ExtremeSee"
+DiskName            = "ExtremeSee Driver Installation Disk"
+ServiceName         = "ExtremeSee"
+ServiceDescription  = "ExtremeSee process and file monitor"
+InstanceName        = "ExtremeSee"
+Altitude            = "385190"
