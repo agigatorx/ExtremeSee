@@ -4,7 +4,7 @@
 🇺🇸
 What is ExtremeSee?
 
-ExtremeSee is a kernel driver program coded for infected file analysis.
+ExtremeSee is a kernel driver program coded for malware analysis.
 
 How does it work?
 
@@ -16,6 +16,13 @@ How does it work?
 **[Date] [Process Created] powershell.exe -WindowStyle Hidden**
 **It displays these to you, and because it is open source, it is open to development. We ensure that it will receive continuous updates.**
 
+How to run driver?
+
+**Copy driver file C:\windows\system32\drivers\ExtremeSee.sys**
+**And open a cmd run it adminastrator and type that:**
+```sc create ExtremeSee binPath= "C:\windows\system32\drivers\ExtremeSee.sys" type= kernel start= demand```
+**When you type that, type cmd "sc start extremesee" driver should open and writes log tho c:\extremesee.log**
+**You need sign driver or close driver sig enforcement for driver run.**
 
 🇹🇷
 ExtremeSee nedir?
@@ -31,3 +38,14 @@ Nasıl çalışır?
 **Loglar şu şekildedir:**
 **[Tarih] [Process Created] powershell.exe -WindowStyle Hidden**
 **Bunları size gösterir ve açık kaynak olduğu için geliştirilmeye açık bir programdır, sürekli güncellemeler alıcağını temin ederiz.**
+
+Driver nasıl çalıştırılır?
+
+C:\windows\system32\drivers\ExtremeSee.sys sürücü dosyasını kopyalayın.
+
+Ve yönetici olarak bir CMD (Komut İstemi) açıp şunu yazın:
+```sc create ExtremeSee binPath= "C:\windows\system32\drivers\ExtremeSee.sys" type= kernel start= demand```
+Bunu yazdıktan sonra CMD'ye sc start extremesee komutunu girin; sürücü açılmalı ve c:\extremesee.log dosyasına log yazmaya başlamalıdır.
+
+Sürücünün çalışabilmesi için ya sürücüyü imzalamanız ya da sürücü imza zorlamasını (driver signature enforcement) kapatmanız gerekir.
+
