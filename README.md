@@ -9,7 +9,7 @@ ExtremeSee is a kernel driver program coded for malware analysis.
 How does it work?
 
 **For example, when any application is launched, it starts with certain parameters—such as "powershell.exe -windowstyle hidden"—which Windows does not show.**
-**While Process Monitor can detect this easily because it loads into memory, this method is cleaner and carries a lower risk of detection.**
+**While Process Monitor can detect this easily because it loads into memory but easily detected because loading memory, but this method is cleaner and carries a lower risk of detection.**
 **When the driver starts, it creates a log file named C:\ExtremeSee.log, and since it is a kernel driver, it monitors every application. For example, if you load a ****virus:**
 **The virus creates a hidden process called "powershell.exe -WindowStyle Hidden" that you cannot see, and the ExtremeSee driver detects and logs it for you.**
 **The logs look like this:**
